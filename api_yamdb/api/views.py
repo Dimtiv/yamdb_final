@@ -1,18 +1,17 @@
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework import mixins, filters, status, permissions
+from rest_framework import filters, mixins, permissions, status
 from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet, ModelViewSet
+from reviews.models import Category, Comment, Genre, Review, Title
+from users.models import USERNAME_ME, User
 
-from reviews.models import Review, Title, Comment, Genre, Category
-from users.models import User, USERNAME_ME
 from .filters import TitleFilter
-from .permissions import IsModerator, IsAdmin, IsOwner, IsReadOnly, IsMe
-from .serializers import (
-    SignUpSerializer, SignInSerializer, UserSerializer, CommentSerializer,
-    GenreSerializer, CategorySerializer, TitleSerializer, ReviewSerializer,
-    TitlePostSerializer, MeUserSerializer
-)
+from .permissions import IsAdmin, IsMe, IsModerator, IsOwner, IsReadOnly
+from .serializers import (CategorySerializer, CommentSerializer,
+                          GenreSerializer, MeUserSerializer, ReviewSerializer,
+                          SignInSerializer, SignUpSerializer,
+                          TitlePostSerializer, TitleSerializer, UserSerializer)
 
 
 class SignUpViewSet(mixins.CreateModelMixin, GenericViewSet):
